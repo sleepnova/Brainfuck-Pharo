@@ -6,7 +6,7 @@ A Brainfuck implementation in Pharo Smalltalk
 BFRunner run: 'bf code'
 ```
 ## Example:
-Print ""Hello World!"" to Transcript.
+Print "Hello World!" to Transcript.
 ```
 BFRunner run: '++++++++[>++++[>++>+++>+++>+<<<<-]>+>->+>>+[<]<-]>>.>>---.+++++++..+++.>.<<-.>.+++.------.--------.>+.>++.'
 ```
