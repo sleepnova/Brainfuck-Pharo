@@ -1,13 +1,13 @@
 "
 I execute bf code on the fly
 
-##Usage:
+## Usage:
 
 ```
 BFRunner run: 'bf code'
 ```
 
-##Example:
+## Example:
 
 Print ""Hello World!"" to Transcript.
 
