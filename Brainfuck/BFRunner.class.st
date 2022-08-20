@@ -57,13 +57,10 @@ BFRunner class >> run: aString [
 
 	"Translate -> compile -> evaluate the code on the fly."
 
-	| method |
-	method := Smalltalk compiler
-		          source: 'temp ' , (self translate: aString);
-		          class: self;
-		          compile.
-
-	method valueWithReceiver: self new arguments: #(  )
+	Smalltalk compiler
+		class: self;
+		receiver: self new;
+		evaluate: (self translate: aString)
 ]
 
 { #category : #running }
@@ -78,7 +75,7 @@ BFRunner class >> translate: aString [
 
 { #category : #brainfuck }
 BFRunner >> dec [
-	arr byteAt: ptr put: (arr byteAt: ptr) - 1
+	self set: (self get) - 1
 ]
 
 { #category : #brainfuck }
@@ -87,8 +84,13 @@ BFRunner >> decPtr [
 ]
 
 { #category : #brainfuck }
+BFRunner >> get [
+	^ arr byteAt: ptr
+]
+
+{ #category : #brainfuck }
 BFRunner >> inc [
-	arr byteAt: ptr put: (arr byteAt: ptr) + 1
+	self set: (self get) + 1
 ]
 
 { #category : #brainfuck }
@@ -104,10 +106,17 @@ BFRunner >> initialize [
 
 { #category : #brainfuck }
 BFRunner >> positive [
-	^ (arr byteAt: ptr) > 0
+	^ self get > 0
+]
+
+{ #category : #brainfuck }
+BFRunner >> set: anInteger [
+	^ arr byteAt: ptr put: anInteger \\ 256
 ]
 
 { #category : #brainfuck }
 BFRunner >> write [
-	Transcript nextPut: (arr byteAt: ptr) asCharacter; flush.
+	Transcript
+		nextPut: self get asCharacter;
+		flush
 ]
